@@ -1,5 +1,6 @@
 package com.bruce.dingding.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bruce.dingding.service.impl.DingUserServiceImpl;
 import com.dingtalk.api.request.OapiInactiveUserV2GetRequest;
 import com.dingtalk.api.response.*;
@@ -27,36 +28,35 @@ public class DingUserServiceTest extends DingBaseServiceTest {
 
     @Test
     public void getByUnionId() {
-        String unionid = "";
-        String userId = dingUserService.getByUnionId(unionid, token);
-        Assert.assertNotNull(userId);
+        String userId = dingUserService.getByUnionId(unionId, token);
+        Assert.assertEquals(userId, this.userId);
     }
 
     @Test
     public void getByUserId() {
-        String userId = "";
         OapiV2UserGetResponse.UserGetResponse response = dingUserService.getByUserId(userId, token);
         Assert.assertNotNull(response);
     }
 
     @Test
     public void getDeptMemberIds() {
-        String deptId = "1";
         OapiUserGetDeptMemberResponse response = dingUserService.getDeptMemberIds(deptId, token);
-        Assert.assertNotNull(response);
+        Assert.assertTrue(response.getUserIds().contains(userId));
     }
 
     @Test
     public void getSimpleList() {
-        OapiUserSimplelistResponse response = dingUserService.getSimpleList(1L, 1L, 10L, null, token);
-        Assert.assertNotNull(response);
+        OapiUserSimplelistResponse response = dingUserService.getSimpleList(Long.valueOf(deptId), 1L, 10L, null, token);
+        for (OapiUserSimplelistResponse.Userlist user : response.getUserlist()) {
+            System.out.println(JSONObject.toJSONString(user));
+        }
     }
 
     @Test
     public void getDetailList() {
-        OapiUserListbypageResponse response = dingUserService.getDetailList(379753107L, 1L, 100L, null, token);
+        OapiUserListbypageResponse response = dingUserService.getDetailList(Long.valueOf(deptId), 1L, 100L, null, token);
         for (OapiUserListbypageResponse.Userlist user : response.getUserlist()) {
-            System.out.println(user);
+            System.out.println(JSONObject.toJSONString(user));
         }
         Assert.assertNotNull(response);
     }
@@ -64,14 +64,17 @@ public class DingUserServiceTest extends DingBaseServiceTest {
     @Test
     public void getAdmin() {
         OapiUserGetAdminResponse response = dingUserService.getAdmin(token);
-        Assert.assertNotNull(response);
+        for (OapiUserGetAdminResponse.AdminList admin : response.getAdminList()) {
+            System.out.println(JSONObject.toJSONString(admin));
+        }
     }
 
     @Test
     public void getAdminScope() {
-        String userId = "1";
         OapiUserGetAdminScopeResponse response = dingUserService.getAdminScope(userId, token);
-        Assert.assertNotNull(response);
+        for (Long id : response.getDeptIds()) {
+            System.out.println(id);
+        }
     }
 
     @Test
@@ -95,9 +98,9 @@ public class DingUserServiceTest extends DingBaseServiceTest {
     @Test
     public void getInactiveUser() {
         OapiInactiveUserV2GetRequest req = new OapiInactiveUserV2GetRequest();
-        req.setIsActive(false);
+        req.setIsActive(true);
         //req.setDeptIds("1,2,3");
-        req.setOffset(0L);
+        req.setOffset(1L);
         req.setSize(100L);
         req.setQueryDate("");
         OapiInactiveUserV2GetResponse response = dingUserService.getInactiveUser(req, token);
@@ -106,6 +109,7 @@ public class DingUserServiceTest extends DingBaseServiceTest {
 
     @Test
     public void getAccessMicroapp() {
+        // 应用必须是服务商所开发的
         Long appId = null;
         String userId = "";
         OapiUserCanAccessMicroappResponse response = dingUserService.getAccessMicroapp(appId, userId, token);

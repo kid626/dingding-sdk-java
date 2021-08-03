@@ -11,9 +11,12 @@ import com.taobao.api.ApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @Copyright Copyright © 2021 fanzh . All rights reserved.
- * @Desc
+ * @Desc 用户管理2.0 https://developers.dingtalk.com/document/app/user-information-creation
  * @ProjectName dingding-sdk-java
  * @Date 2021/8/2 10:48
  * @Author fzh
@@ -280,6 +283,8 @@ public class DingUserServiceImpl extends DingBaseServiceImpl implements DingUser
         }
         try {
             DingTalkClient client = new DefaultDingTalkClient(UrlConstant.INACTIVE_USER_V2);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+            request.setQueryDate(sdf.format(new Date()));
             OapiInactiveUserV2GetResponse resp = client.execute(request, accessToken);
             if (!resp.isSuccess()) {
                 throw new DingDingException(resp.getErrmsg());

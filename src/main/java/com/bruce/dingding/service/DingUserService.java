@@ -8,7 +8,7 @@ import com.dingtalk.api.response.*;
 
 /**
  * @Copyright Copyright © 2021 fanzh . All rights reserved.
- * @Desc
+ * @Desc 用户管理2.0 https://developers.dingtalk.com/document/app/user-information-creation
  * @ProjectName dingding-sdk-java
  * @Date 2021/8/2 10:48
  * @Author fzh

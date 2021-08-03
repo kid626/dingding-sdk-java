@@ -14,15 +14,20 @@ import org.junit.Test;
  */
 public class DingBaseServiceTest {
 
-    Long agentId = 0L;
-    String appKey = "ding****";
-    String appSecret = "****";
+    Long agentId = 852473199L;
+    String appKey = "***";
+    String appSecret = "***";
     String token = "";
+    // 一些用户信息
+    String userId = "***";
+    String unionId = "***";
+    String deptId = "1";
     private DingBaseService dingBaseService;
 
     @Before
     public void before() {
         dingBaseService = new DingBaseServiceImpl(agentId, appKey, appSecret);
+        token = dingBaseService.getAccessToken();
     }
 
 
@@ -40,25 +45,25 @@ public class DingBaseServiceTest {
 
     @Test
     public void getJsapiRealToken() {
-        OapiGetJsapiTicketResponse resp = dingBaseService.getJsapiRealToken(dingBaseService.getAccessToken());
+        OapiGetJsapiTicketResponse resp = dingBaseService.getJsapiRealToken(token);
         System.out.println(resp);
     }
 
     @Test
     public void getJsapiToken() {
-        String jsapiToken = dingBaseService.getJsapiToken(dingBaseService.getAccessToken());
+        String jsapiToken = dingBaseService.getJsapiToken(token);
         System.out.println(jsapiToken);
     }
 
     @Test
     public void getUserInfo() {
-        OapiUserGetuserinfoResponse resp = dingBaseService.getUserInfo("code", dingBaseService.getAccessToken());
+        OapiUserGetuserinfoResponse resp = dingBaseService.getUserInfo("ff53a60e927a344e8fe981018b1a5222", token);
         System.out.println(resp);
     }
 
     @Test
     public void getUserInfoV2() {
-        OapiV2UserGetuserinfoResponse resp = dingBaseService.getUserInfoV2("code", dingBaseService.getAccessToken());
+        OapiV2UserGetuserinfoResponse resp = dingBaseService.getUserInfoV2("2d8bf4d9e154343abd144c76bfdd823e", token);
         System.out.println(resp);
     }
 
