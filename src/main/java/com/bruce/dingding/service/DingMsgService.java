@@ -81,7 +81,7 @@ public interface DingMsgService extends DingBaseService {
      * @return OapiMessageCorpconversationAsyncsendV2Response
      * @throws DingDingException DingDingException
      */
-    OapiMessageCorpconversationAsyncsendV2Response sendLinkMsg(NoticeReq noticeRequest, MarkdownMsgReq markdownMsgReq, String accessToken) throws DingDingException;
+    OapiMessageCorpconversationAsyncsendV2Response sendMdMsg(NoticeReq noticeRequest, MarkdownMsgReq markdownMsgReq, String accessToken) throws DingDingException;
 
 
     /**

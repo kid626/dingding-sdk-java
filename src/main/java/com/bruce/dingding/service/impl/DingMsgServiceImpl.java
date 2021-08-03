@@ -199,7 +199,7 @@ public class DingMsgServiceImpl extends DingBaseServiceImpl implements DingMsgSe
     }
 
     @Override
-    public OapiMessageCorpconversationAsyncsendV2Response sendLinkMsg(NoticeReq noticeRequest, MarkdownMsgReq markdownMsgReq, String accessToken) throws DingDingException {
+    public OapiMessageCorpconversationAsyncsendV2Response sendMdMsg(NoticeReq noticeRequest, MarkdownMsgReq markdownMsgReq, String accessToken) throws DingDingException {
         if (StringUtils.isEmpty(markdownMsgReq.getTitle())) {
             throw new DingDingException("title NOT NULL!");
         }
@@ -213,8 +213,8 @@ public class DingMsgServiceImpl extends DingBaseServiceImpl implements DingMsgSe
         OapiMessageCorpconversationAsyncsendV2Request.Msg msg = new OapiMessageCorpconversationAsyncsendV2Request.Msg();
         msg.setMsgtype(MsgTypeEnum.MARKDOWN.getType());
         msg.setMarkdown(new OapiMessageCorpconversationAsyncsendV2Request.Markdown());
-        msg.getLink().setTitle(markdownMsgReq.getTitle());
-        msg.getLink().setText(markdownMsgReq.getText());
+        msg.getMarkdown().setTitle(markdownMsgReq.getTitle());
+        msg.getMarkdown().setText(markdownMsgReq.getText());
         request.setMsg(msg);
         return noticeRequest(request, accessToken);
     }
@@ -369,6 +369,7 @@ public class DingMsgServiceImpl extends DingBaseServiceImpl implements DingMsgSe
         }
         try {
             DingTalkClient client = new DefaultDingTalkClient(UrlConstant.MSG_UPDATE_STATUS_BAR);
+            request.setAgentId(config.getAgentId());
             OapiMessageCorpconversationStatusBarUpdateResponse resp = client.execute(request, accessToken);
             if (!resp.isSuccess()) {
                 throw new DingDingException(resp.getErrmsg());
