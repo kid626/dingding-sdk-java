@@ -27,8 +27,8 @@ public class DingFileServiceTest extends DingBaseServiceTest {
     @Test
     public void uploadFile() throws Exception {
         String type = "image";
-        String fileName = "test.png";
-        FileInputStream fis = new FileInputStream(fileName);
+        String fileName = "v.jpg";
+        FileInputStream fis = new FileInputStream("");
         OapiMediaUploadResponse resp = dingFileService.uploadFile(type, fileName, fis, token);
         System.out.println(resp);
     }

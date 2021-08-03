@@ -14,7 +14,7 @@ import org.junit.Test;
  */
 public class DingBaseServiceTest {
 
-    Long agentId = 852473199L;
+    Long agentId = 0L;
     String appKey = "***";
     String appSecret = "***";
     String token = "";
@@ -22,6 +22,9 @@ public class DingBaseServiceTest {
     String userId = "***";
     String unionId = "***";
     String deptId = "1";
+
+    String mediaId = "@***";
+
     private DingBaseService dingBaseService;
 
     @Before

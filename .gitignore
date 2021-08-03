@@ -3,6 +3,7 @@ HELP.md
 /log/
 DingDing_Data
 !.mvn/wrapper/maven-wrapper.jar
+/DING_TOKEN
 
 ### STS ###
 .apt_generated
