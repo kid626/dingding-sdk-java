@@ -22,8 +22,8 @@ public class DingChatServiceTest extends DingBaseServiceTest {
 
     private DingChatService dingChatService;
 
-    private String userId = "";
-    private String chatId = "";
+    private String chatId = "chata7596baa8b1a5e0d60160ffd1debc65f";
+    private String openConversationId = "cidrGctnJ7SE0kFbELwJJdjRQ==";
 
     @Before
     public void setUp() throws Exception {
@@ -37,7 +37,7 @@ public class DingChatServiceTest extends DingBaseServiceTest {
         request.setName("测试群001");
         request.setOwner(userId);
         request.setUseridlist(Arrays.asList(userId));
-        OapiChatCreateResponse resp = dingChatService.create(dingChatService.getAccessToken(), request);
+        OapiChatCreateResponse resp = dingChatService.create(token, request);
         System.out.println(resp.getOpenConversationId());
         System.out.println(resp.getChatid());
         System.out.println(resp);
@@ -45,6 +45,7 @@ public class DingChatServiceTest extends DingBaseServiceTest {
 
     @Test
     public void get() {
+        // 没有权限，需要额外申请
         OapiChatGetResponse resp = dingChatService.get(token, chatId);
         System.out.println(resp.getChatInfo());
         System.out.println(resp);
