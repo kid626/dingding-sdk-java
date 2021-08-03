@@ -17,8 +17,9 @@ import org.junit.Test;
  */
 public class DingIndustryAddressServiceTest extends DingBaseServiceTest {
 
-
     private DingIndustryAddressService dingIndustryAddressService;
+
+    private Long extDeptId = 1L;
 
     @Before
     public void before() {
@@ -28,15 +29,14 @@ public class DingIndustryAddressServiceTest extends DingBaseServiceTest {
 
     @Test
     public void detail() {
-        Long deptId = 1L;
-        OapiIndustryDepartmentGetResponse response = dingIndustryAddressService.detail(deptId, token);
+        OapiIndustryDepartmentGetResponse response = dingIndustryAddressService.detail(extDeptId, token);
         Assert.assertNotNull(response);
     }
 
     @Test
     public void getUserList() {
         OapiIndustryUserListRequest req = new OapiIndustryUserListRequest();
-        req.setDeptId(1L);
+        req.setDeptId(extDeptId);
         req.setSize(10L);
         req.setCursor(1L);
         OapiIndustryUserListResponse response = dingIndustryAddressService.getUserList(req, token);
@@ -47,7 +47,7 @@ public class DingIndustryAddressServiceTest extends DingBaseServiceTest {
     public void getList() {
         //TODO:无数据
         OapiIndustryDepartmentListRequest req = new OapiIndustryDepartmentListRequest();
-        req.setDeptId(1L);
+        req.setDeptId(extDeptId);
         req.setSize(10L);
         req.setCursor(1L);
         OapiIndustryDepartmentListResponse response = dingIndustryAddressService.getList(req, token);
@@ -56,9 +56,7 @@ public class DingIndustryAddressServiceTest extends DingBaseServiceTest {
 
     @Test
     public void getUserById() {
-        Long deptId = null;
-        String userId = "";
-        OapiIndustryUserGetResponse response = dingIndustryAddressService.getUserById(deptId, userId, token);
+        OapiIndustryUserGetResponse response = dingIndustryAddressService.getUserById(extDeptId, userId, token);
         Assert.assertNotNull(response);
     }
 
