@@ -19,9 +19,6 @@ public class DingDeptServiceTest extends DingBaseServiceTest {
 
     private DingDeptService dingDeptService;
 
-    private String deptId = "";
-    private String userId = "";
-
     @Before
     public void setUp() throws Exception {
         dingDeptService = new DingDeptServiceImpl(agentId, appKey, appSecret);
@@ -30,7 +27,7 @@ public class DingDeptServiceTest extends DingBaseServiceTest {
 
     @Test
     public void getSubDept() {
-        OapiDepartmentListIdsResponse response = dingDeptService.getSubDept("1", token);
+        OapiDepartmentListIdsResponse response = dingDeptService.getSubDept(deptId, token);
         Assert.assertNotNull(response);
     }
 
@@ -42,7 +39,7 @@ public class DingDeptServiceTest extends DingBaseServiceTest {
 
     @Test
     public void getDeptDetail() {
-        OapiDepartmentGetResponse response = dingDeptService.getDeptDetail(null, "1", token);
+        OapiDepartmentGetResponse response = dingDeptService.getDeptDetail(null, deptId, token);
         Assert.assertNotNull(response);
     }
 
@@ -55,7 +52,7 @@ public class DingDeptServiceTest extends DingBaseServiceTest {
     @Test
     public void createDept() {
         OapiDepartmentCreateRequest request = new OapiDepartmentCreateRequest();
-        request.setParentid("1");
+        request.setParentid(deptId);
         request.setName("测试部门");
         OapiDepartmentCreateResponse response = dingDeptService.createDept(request, token);
         Assert.assertNotNull(response);
@@ -63,9 +60,9 @@ public class DingDeptServiceTest extends DingBaseServiceTest {
 
     @Test
     public void updateDept() {
-        String deptId = "113011110";
+        String deptId = "516091209";
         OapiDepartmentUpdateRequest request = new OapiDepartmentUpdateRequest();
-        request.setName("应用研发部");
+        request.setName("测试部门007");
         request.setId(Long.valueOf(deptId));
         OapiDepartmentUpdateResponse response = dingDeptService.updateDept(request, token);
         Assert.assertNotNull(response);
@@ -73,7 +70,7 @@ public class DingDeptServiceTest extends DingBaseServiceTest {
 
     @Test
     public void deleteDept() {
-        String deptId = "113011110";
+        String deptId = "516091209";
         OapiDepartmentDeleteResponse response = dingDeptService.deleteDept(deptId, token);
         Assert.assertNotNull(response);
     }

@@ -7,7 +7,7 @@ import com.dingtalk.api.response.*;
 
 /**
  * @Copyright Copyright © 2021 fanzh . All rights reserved.
- * @Desc
+ * @Desc 部门管理2.0 https://developers.dingtalk.com/document/app/create-a-department-v2
  * @ProjectName dingding-sdk-java
  * @Date 2021/8/2 10:48
  * @Author fzh
@@ -16,7 +16,7 @@ public interface DingDeptService extends DingBaseService {
     /**
      * 获取所有子部门 已测试
      *
-     * @param id    父部门id。根部门的话传1 (如果不传，默认部门为根部门，根部门ID为1）
+     * @param id          父部门id。根部门的话传1 (如果不传，默认部门为根部门，根部门ID为1）
      * @param accessToken access_token
      * @return OapiDepartmentListIdsResponse
      * @throws DingDingException DingDingException
@@ -27,9 +27,9 @@ public interface DingDeptService extends DingBaseService {
      * 获取部门列表 已测试
      *
      * @param lang        通讯录语言（默认zh_CN，未来会支持en_US）
-     * @param fetchChild 是否递归部门的全部子部门，ISV微应用固定传递false
+     * @param fetchChild  是否递归部门的全部子部门，ISV微应用固定传递false
      * @param id          父部门id（如果不传，默认部门为根部门，根部门ID为1）
-     * @param accessToken       access_token
+     * @param accessToken access_token
      * @return OapiDepartmentListResponse
      * @throws DingDingException DingDingException
      */
@@ -49,7 +49,7 @@ public interface DingDeptService extends DingBaseService {
     /**
      * 查询部门的所有上级父部门路径 已测试
      *
-     * @param id    部门 id
+     * @param id          部门 id
      * @param accessToken access_token
      * @return OapiDepartmentListParentDeptsByDeptResponse
      * @throws DingDingException DingDingException
@@ -60,8 +60,8 @@ public interface DingDeptService extends DingBaseService {
     /**
      * 创建部门 已测试  https://open-doc.dingtalk.com/microapp/serverapi2/dubakq
      *
-     * @param request OapiDepartmentCreateRequest
-     * @param accessToken   access_token
+     * @param request     OapiDepartmentCreateRequest
+     * @param accessToken access_token
      * @return OapiDepartmentCreateResponse
      * @throws DingDingException DingDingException
      */
@@ -70,8 +70,8 @@ public interface DingDeptService extends DingBaseService {
     /**
      * 更新部门 已测试
      *
-     * @param request OapiDepartmentUpdateRequest
-     * @param accessToken   access_token
+     * @param request     OapiDepartmentUpdateRequest
+     * @param accessToken access_token
      * @return OapiDepartmentUpdateResponse
      * @throws DingDingException DingDingException
      */
@@ -80,7 +80,7 @@ public interface DingDeptService extends DingBaseService {
     /**
      * 删除部门  已测试
      *
-     * @param id    (注：不能删除根部门；不能删除含有子部门、成员的部门)
+     * @param id          (注：不能删除根部门；不能删除含有子部门、成员的部门)
      * @param accessToken access_token
      * @return OapiDepartmentDeleteResponse
      * @throws DingDingException DingDingException

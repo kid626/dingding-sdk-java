@@ -94,7 +94,7 @@ public class DingDeptServiceImpl extends DingBaseServiceImpl implements DingDept
             DingTalkClient client = new DefaultDingTalkClient(UrlConstant.DEPT_GET);
             OapiDepartmentGetRequest request = new OapiDepartmentGetRequest();
             request.setId(id);
-            if (StringUtils.isEmpty(lang)) {
+            if (StringUtils.isNotEmpty(lang)) {
                 request.setLang(lang);
             }
             request.setHttpMethod("GET");
