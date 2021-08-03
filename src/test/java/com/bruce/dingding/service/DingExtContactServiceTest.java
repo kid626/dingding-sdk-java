@@ -1,6 +1,7 @@
 package com.bruce.dingding.service;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.bruce.dingding.service.impl.DingExtContactServiceImpl;
 import com.dingtalk.api.request.OapiExtcontactCreateRequest;
 import com.dingtalk.api.request.OapiExtcontactUpdateRequest;
@@ -20,7 +21,8 @@ import java.util.Arrays;
  */
 public class DingExtContactServiceTest extends DingBaseServiceTest {
     private DingExtContactService dingExtContactService;
-    private String userId;
+
+    private String extUserId = "0839560363941584";
 
     @Before
     public void setUp() throws Exception {
@@ -30,21 +32,21 @@ public class DingExtContactServiceTest extends DingBaseServiceTest {
 
     @Test
     public void listLabelGroups() {
-        OapiExtcontactListlabelgroupsResponse response = dingExtContactService.listLabelGroups(1L, 1L, token);
-        System.out.println(JSON.toJSONString(response));
+        OapiExtcontactListlabelgroupsResponse response = dingExtContactService.listLabelGroups(1L, 10L, token);
+        System.out.println(JSONObject.toJSONString(response));
         Assert.assertNotNull(response);
     }
 
     @Test
     public void list() {
-        OapiExtcontactListResponse response = dingExtContactService.list(1L, 1L, token);
-        System.out.println(JSON.toJSONString(response));
+        OapiExtcontactListResponse response = dingExtContactService.list(1L, 10L, token);
+        System.out.println(JSONObject.toJSONString(response));
         Assert.assertNotNull(response);
     }
 
     @Test
     public void get() {
-        OapiExtcontactGetResponse response = dingExtContactService.get(userId, token);
+        OapiExtcontactGetResponse response = dingExtContactService.get(extUserId, token);
         System.out.println(JSON.toJSONString(response));
         Assert.assertNotNull(response);
     }
@@ -53,29 +55,28 @@ public class DingExtContactServiceTest extends DingBaseServiceTest {
     public void add() {
         OapiExtcontactCreateRequest.OpenExtContact openExtContact = new OapiExtcontactCreateRequest.OpenExtContact();
         openExtContact.setTitle("Title");
-        openExtContact.setLabelIds(Arrays.asList(304413077L, 304413084L));
-        openExtContact.setShareDeptIds(Arrays.asList(64849382L, 59170032L));
+        openExtContact.setLabelIds(Arrays.asList(2126070635L, 2126070637L, 2126070644L));
+        openExtContact.setShareDeptIds(Arrays.asList(Long.valueOf(deptId)));
         openExtContact.setAddress("地址");
         openExtContact.setRemark("备注");
         openExtContact.setFollowerUserId("");
-        openExtContact.setName("姓名4");
+        openExtContact.setName("王总");
         openExtContact.setStateCode("86");
         openExtContact.setCompanyName("企业名称");
         openExtContact.setShareUserIds(Arrays.asList("", ""));
         openExtContact.setMobile("");
         OapiExtcontactCreateResponse response = dingExtContactService.add(openExtContact, token);
-        System.out.println(JSON.toJSONString(response));
+        System.out.println(JSONObject.toJSONString(response));
         Assert.assertNotNull(response);
     }
 
     @Test
     public void update() {
-        String userId = "2311171048734362";
         OapiExtcontactUpdateRequest.OpenExtContact openExtContact = new OapiExtcontactUpdateRequest.OpenExtContact();
-        openExtContact.setUserId(userId);
+        openExtContact.setUserId(extUserId);
         openExtContact.setTitle("Title1");
-        openExtContact.setLabelIds(Arrays.asList(304413077L));
-        openExtContact.setShareDeptIds(Arrays.asList(64849382L));
+        openExtContact.setLabelIds(Arrays.asList(2126070635L, 2126070637L, 2126070644L));
+        openExtContact.setShareDeptIds(Arrays.asList(Long.valueOf(deptId)));
         openExtContact.setAddress("地址1");
         openExtContact.setRemark("备注1");
         openExtContact.setFollowerUserId("");
@@ -83,15 +84,14 @@ public class DingExtContactServiceTest extends DingBaseServiceTest {
         openExtContact.setCompanyName("企业名称1");
         openExtContact.setShareUserIds(Arrays.asList(""));
         OapiExtcontactUpdateResponse response = dingExtContactService.update(openExtContact, token);
-        System.out.println(JSON.toJSONString(response));
+        System.out.println(JSONObject.toJSONString(response));
         Assert.assertNotNull(response);
     }
 
     @Test
     public void delete() {
-        String userId = "";
-        OapiExtcontactDeleteResponse response = dingExtContactService.delete(userId, token);
-        System.out.println(JSON.toJSONString(response));
+        OapiExtcontactDeleteResponse response = dingExtContactService.delete(extUserId, token);
+        System.out.println(JSONObject.toJSONString(response));
         Assert.assertNotNull(response);
     }
 }
